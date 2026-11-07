@@ -1,0 +1,11 @@
+CREATE TABLE customers (
+    customer_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone_number VARCHAR(20) NOT NULL,
+    customer_type VARCHAR(10) NOT NULL
+        CHECK (customer_type IN ('RESIDENT', 'NRI')),
+    kyc_status VARCHAR(20) NOT NULL DEFAULT 'PENDING'
+        CHECK (kyc_status IN ('PENDING', 'VERIFIED', 'REJECTED')),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
